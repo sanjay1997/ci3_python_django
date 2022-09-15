@@ -1,0 +1,138 @@
+1.)  For Python installations and pycharm
+
+Python is a popular programming language. It was created by Guido van Rossum, and released in 1991.
+
+It is used for:
+
+web development (server-side),
+software development,
+mathematics,
+system scripting.
+
+
+https://www.python.org/downloads/     //choose latest version 
+====================================================================================================================================================================================================================
+
+https://www.jetbrains.com/pycharm/download/#section=windows //choose community version
+
+4.) Using Modules & Pip In Python
+    Modules means pahle se kuch code bana huaa hai. use bas use karna hai for. eg Number System
+    -> pip install flask | run on cmd
+
+    -> module list website | https://docs.python.org/3/py-modindex.html
+    -> pip means package manager | external module ko install karna and Alredy internal module ko use karna
+
+====================================================================================================================================================================================================================
+
+5.) Writing Our First Python Program
+ print("Sanjay Vishwakarma")
+====================================================================================================================================================================================================================
+
+6.) Using Python As A Calculator
+
+C:\Users\Admin>python
+Python 3.10.7 (tags/v3.10.7:6cc6b13, Sep  5 2022, 14:08:36) [MSC v.1933 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 10+10
+20
+>>> 9*4
+36
+>>> 36/8
+4.5
+>>> 15*5
+75
+>>>
+====================================================================================================================================================================================================================
+7.) Comments, Escape Sequences & Print Statement
+
+#pls Dont remove this line
+"""
+This is a comment
+written in
+more than just one line
+Multiline Comment
+"""
+print("Sanjay Vishwakarma","Rohit Vishwakarma")
+====================================================================================================================================================================================================================
+8.) Variables, Datatypes and Typecasting | Python Tutorials
+
+#pls Dont remove this line
+var1 = "Hello World ";var2 = 44.47;
+var3 = "And India";
+
+print(var1 + var3);
+#------------------------------------------------------------------------
+
+var1 = "50"
+var2 = "30"
+
+#print(100 * str(int(var1) + int(var2)))
+
+#print("Enter Your Number");
+#inpnum = input()
+#print("You Entered : ", int(inpnum) + 10)
+#------------------------------------------------------------------------
+
+print("Enter First Number")
+num1 = input()
+
+print("Enter Second Number")
+num2 = input()
+
+print("Sum of these two numbers is", int(num1) + int(num2))
+====================================================================================================================================================================================================================
+9.) String Slicing And Other Functions In Python
+
+mystr = "Harry is a good boy"
+print(mystr[4])
+#output : y
+
+Note : Best Practice for Refer W3schools.com se
+
+====================================================================================================================================================================================================================
+10.) Python Lists And List Functions
+
+Introduction : Lists are used to store multiple items in a single variable.
+Lists are one of 4 built-in data types in Python used to store collections of data, the other 3 are Tuple, Set, and Dictionary, all with different qualities and usage.
+Lists are created using square brackets:
+
+grocery = ["Harpic", "Vim bar", "Deodrant", "Bhindi", "Palak", 56]
+#print(grocery[5])
+#------------------------------------------------------------------------
+
+num = [2, 7, 9, 15, 3, 8, 5, 4, 20]
+num.sort()
+num.reverse()  // output [20, 15, 9, 8, 7, 5, 4, 3, 2]
+print(num)   // output [2, 3, 4, 5, 7, 8, 9, 15, 20]
+#-------------------------------------------------------------------------
+
+num = [2, 7, 9, 15, 3, 8, 5, 4, 20]
+#num.sort()
+#num.reverse()
+print(num[2:7])  //output [9, 15, 3, 8, 5]
+
+Note : https://www.programiz.com/python-programming/methods/list/count
+------------------------------------------------------------------------------------------------------
+
+num = [2, 7, 9, 15, 3, 8, 5, 4, 20]
+#num.sort()
+#num.reverse()
+num.insert(2,97)
+print(num)
+====================================================================================================================================================================================================================
+11.) Dictionary & Its Functions Explained
+
+# Dictionary is nothing but key and value pairs
+
+d1 = ()
+# try = [], = {}
+#print(type(d1))
+
+d2 = {"Harry":"Burger", "Rohan": "Fish", "Skill":"Roti", "Shubham": {"A":"Maggie", "B":"Roti", "C":"Chicken"}}
+d2["Shree"] = "Dosha"
+print(d2)
+
+====================================================================================================================================================================================================================
+12.) Python Exercise 1 - Apni Dictionary 
+
+Questions: Create a Dictionary and take input form the user and return the meaning of the word from Dictionary

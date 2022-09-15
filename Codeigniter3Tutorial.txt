@@ -1,0 +1,387 @@
+Note: Codeigniter 3 User Guide
+    https://codeigniter.com/userguide3/
+
+
+1.) Ci 3 Introduction
+- Make Speed Development possible
+- Well - organized Code
+- No Worries about Low- Level Security
+- It is Object Oriented Programming
+- MVC Pattern
+
+How to Learn PHP 
+-> Basic php, -> object Oriented php, -> Learn mvc application Development -> Then Learn Framework 
+
+What is Framework ?
+Bani Bani Liabraray ko Re use Karna ,it is Framework.
+
+https://codeigniter.com/userguide3/
+
+2.) How its Works Ci3
+
+http://localhost/ci3/index.php/Welcome/indexx
+
+http://localhost/ci3/index.php/Welcome/index
+
+http://localhost/ci3
+
+
+4.) Codeigniter Tutorial in Hindi (Controllers) | Part-4
+
+7.) Codeigniter Tutorial in Hindi (What is Views) | Part-7
+
+8.) Codeigniter Tutorial in Hindi (Database) | Part-8
+ // Model 
+
+ class Authenicate extends CI_Model
+{
+	public function getdata()
+	{
+		// Associative Array
+		//return ['1'=> 'Abc Value', '2' => 'Xyz Value', '3' => 'Abc + Xyz Value'];
+
+		$this->load->database();
+		$q = $this->db->query("Select * from Users");
+		//$result = $q->result();
+		//print_r($result);
+		//return $q->result();
+        return $q->result_array();
+	}
+}
+
+9.) Codeigniter Tutorial in Hindi (Active Record Class) | Part-9
+
+     Question ? 
+        why we write query function in Framework
+
+    https://www.codeigniter.com/userguide2/database/active_record.html#:~:text=Active%20Record%20Class,to%20perform%20a%20database%20action.
+
+    public function getdata()
+    {
+        $this->load->database();
+        $query = $this->db->get('users');  //it is work fine with query method
+        return $query->result_array();
+    }
+
+    // using where query
+
+    public function getdata()
+    {
+        $this->load->database();
+        $this->db->select('firstname');
+        $this->db->where('id',1);
+        $query = $this->db->get('users');  //it is work fine with query method
+        return $query->result_array();
+
+        //one line query
+        return $this->db->select('firstname')->select('firstname')->where('id',1)->get()->result_array();
+    }
+
+
+10.)  Ci 3 Libraries | Part-10
+      How to load library.
+      
+      public function getdata()
+      {
+        $this->load->library(array('form_validation','email'));
+      }
+
+11.) Ci 3 (Helper) | Part-11
+
+    // helper load
+
+    public function getdata()
+      {
+        $this->load->helper('');
+        echo br(3);   
+      }
+
+12.) (autoload.php) | Part-12
+
+    You can load Model and Database in autoload files in config folder
+
+            --> $autoload['libraries'] = array('database');
+            --> $autoload['model'] = array('Usermodel');
+
+13.) Custom Helpers in Ci 
+
+        // function_helper and common_helper are Custom Helper 
+
+    <?php
+        defined('BASEPATH') OR exit('No direct script access allowed');
+
+        class Welcome extends CI_Controller 
+        {
+            public function User()
+            {
+                $this->load->helper('xyz');
+                test();  // test function defined in xyz helper , and its directly called anywhere
+
+                $data['users'] = = $this->Usermodel->getUserData();
+                $this->load->view('Users/userlist',$data);
+            }
+        }
+    
+    ?>
+
+14.) Extending Helpers | Part-14
+
+
+    <?php
+        defined('BASEPATH') OR exit('No direct script access allowed');
+
+        class Welcome extends CI_Controller 
+        {
+            public function User()
+            {
+                $this->load->helper('array');
+                $arr = ['ABC'=> 'abc', 'XYZ' => 'xyz'];
+                echo element('ABC',$arr, 'Not Found'); // element function overwride to array_helper to custom helper My_array_helper 
+                show();  // test function defined in xyz helper , and its directly called anywhere
+
+                $data['users'] = = $this->Usermodel->getUserData();
+                $this->load->view('Users/userlist',$data);
+            }
+        }
+    
+    ?>
+
+15.) Custom Libraries | Part-15
+
+// Custom Libraries same as Custom helper
+<?php
+        defined('BASEPATH') OR exit('No direct script access allowed');
+
+        class Welcome extends CI_Controller 
+        {
+            public function User()
+            {
+                $this->load->library('Test');
+                $this->test->dbdetails();  // test function defined in xyz helper , and its directly called anywhere
+
+                $data['users']  = $this->Usermodel->getUserData();
+                $this->load->view('Users/userlist',$data);
+            }
+        }
+    
+    ?>
+
+    // Test Liabraray load in autoload files
+    // --> $autoload['libraries'] = array('database','Test');
+
+16.) get_instance() | Helper Function | Part-16
+
+17.)  Extending Libraries | Part-17 
+
+        Cart Libraries
+        Email Libraries
+
+--> In Libraries folder make one file the name is  My_Email.php
+     
+     <?php
+
+     class My_Email extends CI_Email
+     {
+        public function show()
+        {
+            echo 'extending  Libraries';
+        }
+     }
+     ?>
+--> in Controllers file
+
+class Users extends CI_Controller
+{
+    public function User()
+    {
+        $this->load->library("email");
+        $this->email->show();
+    }
+}
+
+18.) Core Classes | Part-18
+      * Most important to learn 
+===========================================================================================================
+
+21.) Codeigniter Mini Project Tutorial in Hindi/Urdu (Base Controller) & Core Classes concept?
+
+    in Core folder make MY_Controller file and extends CI_Controller
+
+    <?php
+
+        class MY_Controller extends CI_Controller
+        {
+            
+        }
+
+    ?>
+
+    --------------------------------------------------------------------
+
+    in Controller folder make a Users Controller File and extends MY_Controller
+
+    <?php
+        class Users extends MY_Controller
+        {
+            public function index()
+            {
+                echo 'Testing......';
+            }
+
+        }
+    ?>
+
+    http://localhost/ci3/index.php/Users
+
+===========================================================================================================
+
+22.)   Removing Index.php
+
+    //  Below code save are .htaccess file  ti remove index.php
+        RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteRule ^(.*)$ index.php/$1 [L]
+============================================================================================================
+
+23.) Adding CSS/JS files) | Link_tag() | Base_url()
+
+24.) (Create Login Form) | form_open() | form_input()
+
+        // we are Desing this form with the help of form_helper
+
+        <div class="col-md-4 border">
+				<h3 class="text-center">Admin Form</h3>
+				<?= form_open('admin/index'); ?>
+				<label for="email" class="col-sm-4 col-form-label">Email Address :</label>
+
+				<?= form_input(['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Enter Username']); ?>
+				
+				<label for="inputPassword" class="col-sm-3 col-form-label">Password : </label>
+				<?= form_input(['type' => 'password', 'class' => 'form-control', 'placeholder' => 'Enter Password']); ?>
+
+				<br/>
+				<?= form_submit(['type' => 'submit', 'class' => 'btn btn-outline-success', 'value'=> 'Submit']); ?>
+				<?= form_submit(['type' => 'reset', 'class' => 'btn btn-outline-success', 'value'=> 'Reset']); ?>
+				<br/>
+		</div>
+================================================================================================================
+
+25.) Login Form Validation) | form_validation()
+
+    public function index()
+	{
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('uname','User Name','required|alpha');
+		$this->form_validation->set_rules('password','Password','required|max_length[12]');
+
+		if ($this->form_validation->run()) {
+			echo 'Validation Successfull';
+		}
+		else{
+			echo validation_errors();
+		}
+	}
+=========================================================================================================================
+26.) Codeigniter Mini Project (Keeping Correct Field Values | Project Structure | Index.php Fix)
+
+
+==========================================================================================================================
+28.")  Creating Login Model
+
+43.) ( Pagination ) 💡 Very Simple Example
+
+ We required Pagination for.
+            --> library('pagination');
+            --> Per_page
+            --> total_rows
+            --> intialize($config);
+            --> URL Segment
+// for echo query
+
+<?= $this->db->last_query(); ?>
+
+SELECT * FROM `article` WHERE `status` = 1 AND `user_id` = '1' LIMIT 4
+
+==========================================================================================================================
+
+50.) Export Data to Excel in Codeigniter using PHPExcel
+
+51.) Codeigniter Dynamic Dependent Select Box using Ajax
+
+53) ( Image File Upload ) 💡 Best Example Ever 
+==========================================================================================================================
+
+56.)  Error logging in CodeIgniter 💡 How to do Maintain logs🔥
+
+
+Note: Log Messages
+
+
+|	0 = Disables logging, Error logging TURNED OFF
+|	1 = Error Messages (including PHP errors)
+|	2 = Debug Messages
+|	3 = Informational Messages
+|	4 = All Messages
+
+$config['log_threshold'] = 4;  // chnage 0 to 4 to set All Messages
+
+$config['log_path'] = 'application/logs/';     // where is Error is Display
+
+
+==========================================================================================================================
+58.) CodeIgniter Convert Query to Json & Insert Into Database | Json Data store into database
+
+<?php
+$age =  [
+	"FirstName" => "Sanjay",
+    "LastNmae"  => "Vishwakarma",
+    "Email"     => "sanjay@gmail.com",
+    "Phone"    => 9874563214
+];
+
+$encode_data = json_encode($age);
+
+echo json_encode($age);
+
+echo '<br/>';
+
+$encode_data = json_decode($encode_data);
+
+print_r($encode_data);
+
+?>
+
+======================================================================
+59.) How to Get User IP, Browser,Language & OS Details in Codeigniter 3
+
+
+        $this->load->library('user_agent');
+		$data['browser'] 		 = $this->agent->browser();
+		$data['browser_version'] = $this->agent->version();
+		$data['os'] 			 = $this->agent->platform();
+		$data['ip_address'] 	 = $this->input->ip_address();
+		$data['en'] 			 = $this->agent->accept_lang('en');
+
+		// echo '<pre>';
+		// print_r($data);
+		// echo '</pre>';exit;
+
+==========================================================================================================================
+
+60.) Check Email availability using Ajax & Jquery | Simple Example
+
+#Stripe$@2022
+
+
+============================================================ PHP cURL Tutorial with Example | Learn cURL means Client URL===============================================
+
+1.) What is cURL
+Transfers data from or to a server, using one of the protocols: HTTP, HTTPS, FTP, FTPS, SCP, SFTP, TFTP, DICT, TELNET, LDAP or FILE. (To transfer multiple files use wget or FTP.)
+
+curl_init();    // curl_init() ko use karte hai, initialization ke liye
+curl_setopt();  // curl_setopt() ka use karte hai, jab bhi koi curl ka data bhejna rahta hai
+curl_exec();    //  yaha par curl_exec() Execute karte hai
+curl_close();   // yaha par curl_close karte hai 
+
+

@@ -1,0 +1,284 @@
+1.) What is Django 
+
+Django is a Python framework that makes it easier to create web sites using Python.
+Django takes care of the difficult stuff so that you can concentrate on building your web applications.
+Django emphasizes reusability of components, also referred to as DRY (Don't Repeat Yourself), and comes with ready-to-use features like login system, 
+database connection and CRUD operations (Create Read Update Delete).
+
+3.) What is Model View Template (MVT) in Django
+-> The MVT (Model View Template) is a Software Design Pattern
+-> It is a Collection of three important components Model View and Template
+-> Model : Model is going to act as the interface of your data.
+-> View : The View is the user interface -- what you see in your browser when you render a website.
+-> Template : A Template Consists  of static parts of the desired HTML output as we some special syantax describing how dynamic content will be inserted. 
+
+                                    ---> Model
+User --> Django --> Url --> View 
+                                    ---> Template
+
+===============================================================================================================================
+4.) How to Install Python, PIP and Django
+
+to check python version: |    python -V
+
+to check what i have installed :| pip freeze
+
+install python commond: |  pip install django
+===============================================================================================================================
+
+.5) Creating a New Project in Django
+
+C:\Users\Admin> djano-admin
+
+create project | django-admin startproject djproject
+===============================================================================================================================
+
+.6) What is Development Server and How it Run in Django
+
+step 1: open cmd and go to project directory on cmd 
+step 2: and run | python manage.py runserver
+
+------------------------------Run Server on Diffrenet Port ( if You Have Run Alredy another project Like React js and Angular js)------------------------------------------------------
+step 2: | python manage.py runserver 4800                   runed : http://127.0.0.1:4800/
+
+===============================================================================================================================
+.7) How to Download & Setup Visual Studio Code
+
+https://www.youtube.com/shorts/sOXXiG2C458
+
+https://www.youtube.com/shorts/tvk9SBYzcrA
+===============================================================================================================================
+
+.8) How to Create Folder for Django Application | Folder Structure
+
+settings.py is main file
+
+BASE_DIR :
+SECRET_KEY: 
+DEBUG: 
+ALLOWED_HOSTS :
+INSTALLED_APPS : 
+MIDDLEWARE : 
+
+Note: media , static and Templates folder banana padega or settings.py and urls.py file bahut hi important hai.
+Note: default Databse is sqllite hi hai
+=============================================================================================================================
+
+9.)Learn How to Migrate Default Migration in Django
+
+Migrations means, kuch Table ki Schema pahle se bani hoti hai
+Note: Migrate karte hi , Default databse isme create(sql lite) ho jate hai
+
+create table in sql lite command // python manage.py migrate 
+=============================================================================================================================
+
+10.) What is Database and How to Install Database Browser for SQLite in Windows
+
+https://sqlitebrowser.org/dl/
+=============================================================================================================================
+
+11.) What is Superuser in Django and How to Create it
+
+// create table  // python manage.py migrate
+// python manage.py createsuperuser
+
+=============================================================================================================================
+12.) How to Use URLs & Views in Django
+
+//in urls.py file change admin to admin-panel and hit the browser
+urlpatterns = [
+    path('admin-panel/', admin.site.urls),
+]
+
+=============================================================================================================================
+13.) Learn to Create URLs & Views in Django
+
+    step 1.)  views.py nam ka ek file banayege djproject ek ander wha par httpresponse import karege | this is a function ( def aboutUs(request):)
+    -------------------views.py----------------------------------------------------
+    from django.http import HttpResponse
+
+    def aboutUs(request):
+        return HttpResponse("Welcome to Django Tutorial")
+
+    def course(request):
+        return HttpResponse("<h1><b>List of Courses</b></h1>")
+    ------------------------------------------------------------------------
+
+    step 2.) urls.py ke ander views.py ko import karege like below code and route ko add karege
+        
+    from djproject import views
+
+    urlpatterns = [
+    path('admin-panel/', admin.site.urls),
+    path('about-us/',views.aboutUs),
+    path("course",views.course)
+    ]   
+
+=============================================================================================================================
+14.) Creating a Dynamic URL/Route in Django
+
+route bante kaisa hai , route en sare base par banta hai  
+                int
+                str
+                slug    //eg. hello-ws-iip
+
+------------------urls.py----------------------------------------------------------
+urlpatterns = [
+    path('admin-panel/', admin.site.urls),
+    path('about-us/',views.aboutUs),
+    path("course/",views.course),
+    path("course/<int:courseid>",views.courseDetails)                       
+]
+
+Note: path("course/<str:courseid>",views.courseDetails)  
+      path("course/<slug:courseid>",views.courseDetails)  
+      path("course/<courseid>",views.courseDetails)    // send any data type
+----------------------views.py-------------------------------------------------
+
+def courseDetails(request,courseid):
+    return HttpResponse(courseid)
+
+=============================================================================================================================
+15.) How to Render an HTML Template as Response | Django Framework
+
+Step 1) create index.html file inside template folder
+---------------------------urls.py file me home page ke liye----------------------------------------------------
+
+        urlpatterns = [
+            path('',views.homePage),
+        ]
+------------------------views.py file render ke liye django shortcuts import karege-----------------------------
+
+from django.http import HttpResponse
+from django.shortcuts import render
+
+def homePage(request):
+    return render(request,"index.html")
+
+=============================================================================================================================
+17.) For Loop Django
+
+--------------------------views.py----------------------------------------------------------
+
+from django.http import HttpResponse
+from django.shortcuts import render
+
+def homePage(request):
+    data={
+        'title':'Home page',
+        'bdata': 'Welcome to Learn Django | This is a HTML PAGE',
+        'clist':['PHP', 'JavaScript', 'Codeigniter 3 & 4', 'Django', 'Python'],
+        'student_details' : [
+            {'name':'Rohit Vishwakarma','phone':9638527412},
+            {'name':'Sanjay Vishwakarma','phone':9638527412},
+        ]
+    }
+    return render(request,"index.html",data)
+
+--------------------------index.html----------------------------------------------------------
+
+<html>
+  <head>
+    <title>{{title}}</title>
+  </head>
+  <body>
+    {{bdata}}
+
+    <table border="1">
+      <tr>
+        <th>Sr No.</th>
+        <th>Course Name</th>
+      </tr>
+      {% for item in clist %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{item}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <br /><br />
+
+    <table border="1">
+      <tr>
+        <th>Sr No.</th>
+        <th>Student Name</th>
+        <th>Student Contact No.</th>
+      </tr>
+      {% for student in student_details %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{student.name}}</td>
+        <td>{{student.phone}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
+
+=============================================================================================================================
+18.) What is If Else Statement in Django
+
+--------------------------views.py----------------------------------------------------------
+
+from django.http import HttpResponse
+from django.shortcuts import render
+
+def homePage(request):
+    data={
+        'title':'Home page',
+        'bdata': 'Welcome to Learn Django | This is a HTML PAGE',
+        'clist':['PHP', 'JavaScript', 'Codeigniter 3 & 4', 'Django', 'Python'],
+        'numbers': [10,20,30,40,50,60],
+        'student_details' : [
+            {'name':'Rohit Vishwakarma','phone':9638527412},
+            {'name':'Sanjay Vishwakarma','phone':9638527412},
+        ]
+    }
+    return render(request,"index.html",data)
+
+--------------------------index.html----------------------------------------------------------
+
+<html>
+  <head>
+    <title>{{title}}</title>
+  </head>
+  <body>
+    {% if numbers|length > 0 %}
+
+        {% for number in numbers %} 
+            {% if number > 20 %}
+                <div>{{number}}</div>
+            {% endif %} 
+        {% endfor %}
+
+        {% else %}
+        <div>No Data Found</div>
+    {% endif %}
+  </body>
+</html>
+
+=============================================================================================================================
+19.) What is CSS, JavaScript & Images in Django and How to use them
+
+--------------------------------------------------------------------------------
+Note : Add This code in settings.py then start you static code like a php include 
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+--------------------------------------------------------------------------------
+
+{% load static %}
+<html>
+  <head>
+    <title>Home</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+  </head>
+  <body>
+    {% include 'header.html' %}
+
+    <img src="{% static 'image/coding.jpeg' %}" style="width:25%" >
+
+    {% include 'footer.html' %}
+  </body>
+</html>
